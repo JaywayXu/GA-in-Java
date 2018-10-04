@@ -1,5 +1,5 @@
 # Apress Source Code
-# 《Java遗传算法编程》自我实现
+# 《Java遗传算法编程》自我学习
 This repository accompanies [*Genetic Algorithms in Java Basics*](http://www.apress.com/9781484203293) by Lee Jacobson and Burak Kanber (Apress, 2015).
 
 ![Cover image](9781484203293.jpg)

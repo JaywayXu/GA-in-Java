@@ -2,11 +2,11 @@ package chapter2;
 
 /**
  * This is our main class used to run the genetic algorithm.
- * Ã¿Ò»ÕÂ¶¼ĞèÒªÒ»¸öÒıµ¼Àà£¬ÓÃÓÚ³õÊ¼»¯ÒÅ´«Ëã·¨£¬²¢×÷ÎªÓ¦ÓÃ³ÌĞòµÄÆğµã£¬ÓÃÓÚ¶¨Òåmain·½·¨
+ * æ¯ä¸€ç« éƒ½éœ€è¦ä¸€ä¸ªå¼•å¯¼ç±»ï¼Œç”¨äºåˆå§‹åŒ–é—ä¼ ç®—æ³•ï¼Œå¹¶ä½œä¸ºåº”ç”¨ç¨‹åºçš„èµ·ç‚¹ï¼Œç”¨äºå®šä¹‰mainæ–¹æ³•
  * 
  * This case is one of the simplest problems we can solve: the objective is to
  * end up with an individual whose chromosome is all ones.
- * Õâ¸öÀı×ÓÊÇÒ»¸ö×î¼òµ¥µÄÀı×Ó£¬Ä¿±êÊÇµÃµ½È¾É«ÌåÊÇÈ«Ò»µÄ¸öÌå(¼´111111111111....)
+ * è¿™ä¸ªä¾‹å­æ˜¯ä¸€ä¸ªæœ€ç®€å•çš„ä¾‹å­ï¼Œç›®æ ‡æ˜¯å¾—åˆ°æŸ“è‰²ä½“æ˜¯å…¨ä¸€çš„ä¸ªä½“(å³111111111111....)
  * 
  * The simplicity of this problem makes the GeneticAlgorithm class'
  * "calcFitness" method very simple. We'll just count the number of ones in the
@@ -14,8 +14,8 @@ package chapter2;
  * "isTerminationConditionMet" method in the GeneticAlgorithm class for this
  * example is very simple: if the fitness score (ie, number of ones) is the same
  * as the length of the chromosome (ie, we're all ones), we're done!
- * Õâ¸öÎÊÌâµÄ¼òµ¥ĞÔÊ¹µÃGeneticAlgorithmÀàµÄ"calcFitness"·½·¨ÊÇÊ®·Ö¼òµ¥¡£ÎÒÃÇ½ö½öĞèÒªÊıÈ¾É«ÌåÖĞ1µÄÊıÁ¿£¬Ê¹ÓÃÕâ¸ö×÷ÎªÊÊÓ¦¶Èº¯Êı¡£
- * ÏàËÆµÄ
+ * è¿™ä¸ªé—®é¢˜çš„ç®€å•æ€§ä½¿å¾—GeneticAlgorithmç±»çš„"calcFitness"(è®¡ç®—é€‚åº”åº¦å‡½æ•°)æ–¹æ³•ååˆ†ç®€å•ã€‚æˆ‘ä»¬ä»…ä»…éœ€è¦æ•°æŸ“è‰²ä½“ä¸­1çš„æ•°é‡ï¼Œä½¿ç”¨è¿™ä¸ªä½œä¸ºé€‚åº”åº¦å‡½æ•°ã€‚
+ * ç›¸ä¼¼çš„,è¿™ä¸ªé—®é¢˜ä¸­çš„"isTerminationConditionMet"
  * 
  * @author bkanber
  *

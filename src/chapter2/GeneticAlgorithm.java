@@ -6,14 +6,14 @@ package chapter2;
  * problem-specific, meaning that (for instance) the "calcFitness" method may
  * need to change from problem to problem.
  * 
- * GeneticAlgorithmÀàÊÇÎÒÃÇ¹ÜÀíÒÅ´«Ëã·¨²Ù×÷µÄÖ÷Òª³éÏóÀà¡£ Õâ¸öÀàÊÇÌØ¶¨ÓÚÎÊÌâ´æÔÚµÄ£¬
- * ÕâÒâÎ¶×Å£¨ÀıÈç£©¡°calcFitness¡±·½·¨»á¸ù¾İÎÊÌâµÄ²»Í¬¶ø¸Ä±ä¾ßÌåÊµÏÖ¡£
+ * GeneticAlgorithmç±»æ˜¯æˆ‘ä»¬ç®¡ç†é—ä¼ ç®—æ³•æ“ä½œçš„ä¸»è¦æŠ½è±¡ç±»ã€‚ è¿™ä¸ªç±»æ˜¯ç‰¹å®šäºé—®é¢˜å­˜åœ¨çš„ï¼Œ
+ * è¿™æ„å‘³ç€ï¼ˆä¾‹å¦‚ï¼‰â€œcalcFitnessâ€æ–¹æ³•ä¼šæ ¹æ®é—®é¢˜çš„ä¸åŒè€Œæ”¹å˜å…·ä½“å®ç°ã€‚
  * 
  * This class concerns itself mostly with population-level operations, but also
  * problem-specific operations such as calculating fitness, testing for
  * termination criteria, and managing mutation and crossover operations (which
  * generally need to be problem-specific as well).
- * ¸ÃÀàÖ÷Òª¹Ø×¢ÖÖÈº¼¶²Ù×÷£¬µ«Ò²Éæ¼°ÌØ¶¨ÓÚÎÊÌâµÄ²Ù×÷£¬ÀıÈç¼ÆËãÊÊÓ¦ĞÔ£¬ÅĞ¶ÏÊÇ·ñ´ïµ½ÖÕÖ¹Ìõ¼şÒÔ¼°¹ÜÀí±äÒìºÍ½»²æ²Ù×÷ £¨Í¨³£Ò²ĞèÒª¸ù¾İÌØ¶¨ÎÊÌâ½øĞĞ¸Ä±ä£©¡£
+ * è¯¥ç±»ä¸»è¦å…³æ³¨ç§ç¾¤çº§æ“ä½œï¼Œä½†ä¹Ÿæ¶‰åŠç‰¹å®šäºé—®é¢˜çš„æ“ä½œï¼Œä¾‹å¦‚è®¡ç®—é€‚åº”æ€§ï¼Œåˆ¤æ–­æ˜¯å¦è¾¾åˆ°ç»ˆæ­¢æ¡ä»¶ä»¥åŠç®¡ç†å˜å¼‚å’Œäº¤å‰æ“ä½œ ï¼ˆé€šå¸¸ä¹Ÿéœ€è¦æ ¹æ®ç‰¹å®šé—®é¢˜è¿›è¡Œæ”¹å˜ï¼‰ã€‚
  * 
  * Generally, GeneticAlgorithm might be better suited as an abstract class or an
  * interface, rather than a concrete class as below. A GeneticAlgorithm
@@ -23,54 +23,54 @@ package chapter2;
  * instance, the concrete class "TravelingSalesmanGeneticAlgorithm" would
  * implement the "GeneticAlgorithm" interface. This is not the approach we've
  * chosen, however, so that we can keep each chapter's examples as simple and
- * concrete as possible. ËùÒÔGeneticAlgorithm¿ÉÄÜ¸üÊÊºÏ×÷ÎªÒ»¸öĞéÀà»òÕßÊÇÒ»¸ö½Ó¿Ú£¬¶ø²»ÊÇÒ»¸ö¾ßÌåµÄÀà¡£
- * GeneticAlgorithm½Ó¿ÚĞèÒªÊµÏÖÖîÈç¡°isTerminationConditionMet¡±£¬¡°calcFitness¡±£¬¡°mutatePopulation¡±µÈ·½·¨£¬
- * ²¢ÇÒ½«¶¨Òå¾ßÌåÀàÀ´½â¾öÌØ¶¨ÎÊÌâÓò¡£ÀıÈç£¬¾ßÌåÀà¡°TravelingSalesmanGeneticAlgorithm¡±½«ÊµÏÖ¡°GeneticAlgorithm¡±½Ó¿Ú¡£
- * ÏÔÈ»Õâ²»ÊÇÎÒÃÇÓ¦¸ÃÑ¡ÔñµÄ·½·¨£¬µ«ÊÇÕâÑù×ö¿ÉÒÔÊ¹Ã¿ÕÂµÄÊµÀı¾¡¿ÉÄÜµÄ¼òµ¥ºÍ¾ßÌå
+ * concrete as possible. æ‰€ä»¥GeneticAlgorithmå¯èƒ½æ›´é€‚åˆä½œä¸ºä¸€ä¸ªè™šç±»æˆ–è€…æ˜¯ä¸€ä¸ªæ¥å£ï¼Œè€Œä¸æ˜¯ä¸€ä¸ªå…·ä½“çš„ç±»ã€‚
+ * GeneticAlgorithmæ¥å£éœ€è¦å®ç°è¯¸å¦‚â€œisTerminationConditionMetâ€ï¼Œâ€œcalcFitnessâ€ï¼Œâ€œmutatePopulationâ€ç­‰æ–¹æ³•ï¼Œ
+ * å¹¶ä¸”å°†å®šä¹‰å…·ä½“ç±»æ¥è§£å†³ç‰¹å®šé—®é¢˜åŸŸã€‚ä¾‹å¦‚ï¼Œå…·ä½“ç±»â€œTravelingSalesmanGeneticAlgorithmâ€å°†å®ç°â€œGeneticAlgorithmâ€æ¥å£ã€‚
+ * æ˜¾ç„¶è¿™ä¸æ˜¯æˆ‘ä»¬åº”è¯¥é€‰æ‹©çš„æ–¹æ³•ï¼Œä½†æ˜¯è¿™æ ·åšå¯ä»¥ä½¿æ¯ç« çš„å®ä¾‹å°½å¯èƒ½çš„ç®€å•å’Œå…·ä½“
  * 
  * @author bkanber
  *
  */
 public class GeneticAlgorithm {
-	private int populationSize;// ÖÖÈºÊıÁ¿
+	private int populationSize;// ç§ç¾¤æ•°é‡
 
 	/**
 	 * Mutation rate is the fractional probability than an individual gene will
 	 * mutate randomly in a given generation. The range is 0.0-1.0, but is generally
 	 * small (on the order of 0.1 or less).
-	 * ±äÒìÂÊÊÇµ¥¸ö»ùÒòÔÚ¸ø¶¨ÊÀ´úÖĞËæ»úÍ»±äµÄ¸ÅÂÊ·ÖÊı¡£·¶Î§ÊÇ0-1Ö®¼ä£¬µ«ÊÇÍ¨³£ÉèÖÃºÜĞ¡Ò»°ãÉèÖÃÎª0.1ÒÔÏÂµÄĞ¡Êı
+	 * å˜å¼‚ç‡æ˜¯å•ä¸ªåŸºå› åœ¨ç»™å®šä¸–ä»£ä¸­éšæœºçªå˜çš„æ¦‚ç‡åˆ†æ•°ã€‚èŒƒå›´æ˜¯0-1ä¹‹é—´ï¼Œä½†æ˜¯é€šå¸¸è®¾ç½®å¾ˆå°ä¸€èˆ¬è®¾ç½®ä¸º0.1ä»¥ä¸‹çš„å°æ•°
 	 */
-	private double mutationRate;// ±äÒìÂÊ
+	private double mutationRate;// å˜å¼‚ç‡
 
 	/**
 	 * Crossover rate is the fractional probability that two individuals will "mate"
 	 * with each other, sharing genetic information, and creating offspring with
 	 * traits of each of the parents. Like mutation rate the rance is 0.0-1.0 but
-	 * small. ½»²æÂÊÊÇÁ½¸ö¸öÌå»áÏà»¥½»²æµÄ¸ÅÂÊ·ÖÊı£¬·ÖÏí»ùÒòĞÅÏ¢£¬²¢´´Ôì¾ßÓĞÃ¿¸ö¸¸Ä¸ÌØÕ÷µÄºó´ú¡£ºÍÍ»±äÂÊÒ»Ñù£¬·¶Î§ÔÚ0-1Ö®¼ä£¬ÊÇÒ»¸öºÜĞ¡µÄĞ¡Êı¡£
+	 * small. äº¤å‰ç‡æ˜¯ä¸¤ä¸ªä¸ªä½“ä¼šç›¸äº’äº¤å‰çš„æ¦‚ç‡åˆ†æ•°ï¼Œåˆ†äº«åŸºå› ä¿¡æ¯ï¼Œå¹¶åˆ›é€ å…·æœ‰æ¯ä¸ªçˆ¶æ¯ç‰¹å¾çš„åä»£ã€‚å’Œçªå˜ç‡ä¸€æ ·ï¼ŒèŒƒå›´åœ¨0-1ä¹‹é—´ï¼Œæ˜¯ä¸€ä¸ªå¾ˆå°çš„å°æ•°ã€‚
 	 */
-	private double crossoverRate; // ½»²æÂÊ
+	private double crossoverRate; // äº¤å‰ç‡
 
 	/**
 	 * Elitism is the concept that the strongest members of the population should be
 	 * preserved from generation to generation. If an individual is one of the
-	 * elite, it will not be mutated or crossover. ¾«Ó¢Ö÷ÒåÊÇÖÖÈºÖĞ×îÇ¿´óµÄ³ÉÔ±Ó¦¸Ã´ú´úÏà´«µÄ¸ÅÄî¡£
-	 * Èç¹ûÒ»¸öÈËÊÇ¾«Ó¢Ö®Ò»£¬Ëü½«²»»á·¢Éú±äÒì»ò½»²æ
+	 * elite, it will not be mutated or crossover. ç²¾è‹±ä¸»ä¹‰æ˜¯ç§ç¾¤ä¸­æœ€å¼ºå¤§çš„æˆå‘˜åº”è¯¥ä»£ä»£ç›¸ä¼ çš„æ¦‚å¿µã€‚
+	 * å¦‚æœä¸€ä¸ªäººæ˜¯ç²¾è‹±ä¹‹ä¸€ï¼Œå®ƒå°†ä¸ä¼šå‘ç”Ÿå˜å¼‚æˆ–äº¤å‰
 	 */
-	private int elitismCount; // ¾«Ó¢Êı
+	private int elitismCount; // ç²¾è‹±æ•°
 
 	public GeneticAlgorithm(int populationSize, double mutationRate, double crossoverRate, int elitismCount) {
-		this.populationSize = populationSize; // ÖÖÈºÊıÁ¿
-		this.mutationRate = mutationRate;// ±äÒìÂÊ
-		this.crossoverRate = crossoverRate;// ½»²æÂÊ
-		this.elitismCount = elitismCount;// ¾«Ó¢ÊıÁ¿
+		this.populationSize = populationSize; // ç§ç¾¤æ•°é‡
+		this.mutationRate = mutationRate;// å˜å¼‚ç‡
+		this.crossoverRate = crossoverRate;// äº¤å‰ç‡
+		this.elitismCount = elitismCount;// ç²¾è‹±æ•°é‡
 	}
 
 	/**
-	 * Initialize population //³õÊ¼»¯ÖÖÈº
+	 * Initialize population //åˆå§‹åŒ–ç§ç¾¤
 	 * 
-	 * @param chromosomeLength //È¾É«Ìå³¤¶È
-	 *            The length of the individuals chromosome //µ¥¸öÈ¾É«ÌåµÄ³¤¶È
-	 * @return population The initial population generated //³õÊ¼ÖÖÈº
+	 * @param chromosomeLength //æŸ“è‰²ä½“é•¿åº¦
+	 *            The length of the individuals chromosome //å•ä¸ªæŸ“è‰²ä½“çš„é•¿åº¦
+	 * @return population The initial population generated //åˆå§‹ç§ç¾¤
 	 */
 	public Population initPopulation(int chromosomeLength) {
 		// Initialize population

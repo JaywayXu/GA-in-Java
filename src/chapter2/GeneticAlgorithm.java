@@ -146,11 +146,21 @@ public class GeneticAlgorithm {
 	 * @param population
 	 *            the population to evaluate
 	 */
+
+	/**
+	 * 评价整个种群
+	 * 
+	 * 我们也需要一个简单的辅助方法，遍历每个个体并评估他们(即对每个个体调用calcFitness).称这个方法为evalPopulation,
+	 * 并将其添加到GeneticAlgorithm类中，也许整个种群的适应度值并不很重要，但是使每个个体都能得到评价的过程很重要
+	 * 
+	 * @param population
+	 * @author cloud
+	 */
 	public void evalPopulation(Population population) {
 		double populationFitness = 0;
 
-		// Loop over population evaluating individuals and suming population
-		// fitness
+		// Loop over population evaluating individuals and suming population fitness
+		// 循环种群评价每个个体并总结种群健康状况
 		for (Individual individual : population.getIndividuals()) {
 			populationFitness += calcFitness(individual);
 		}

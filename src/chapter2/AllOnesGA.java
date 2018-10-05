@@ -2,9 +2,11 @@ package chapter2;
 
 /**
  * This is our main class used to run the genetic algorithm.
+ * 每一章都需要一个引导类，用于初始化遗传算法，并作为应用程序的起点，用于定义main方法
  * 
  * This case is one of the simplest problems we can solve: the objective is to
  * end up with an individual whose chromosome is all ones.
+ * 这个例子是一个最简单的例子，目标是得到染色体是全一的个体(即111111111111....)
  * 
  * The simplicity of this problem makes the GeneticAlgorithm class'
  * "calcFitness" method very simple. We'll just count the number of ones in the
@@ -12,6 +14,8 @@ package chapter2;
  * "isTerminationConditionMet" method in the GeneticAlgorithm class for this
  * example is very simple: if the fitness score (ie, number of ones) is the same
  * as the length of the chromosome (ie, we're all ones), we're done!
+ * 这个问题的简单性使得GeneticAlgorithm类的"calcFitness"方法是十分简单。我们仅仅需要数染色体中1的数量，使用这个作为适应度函数。
+ * 相似的
  * 
  * @author bkanber
  *

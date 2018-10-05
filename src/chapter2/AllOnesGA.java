@@ -31,7 +31,7 @@ public class AllOnesGA {
 		// Initialize population
 		/*
 		 * 初始化一个潜在解构成的种群,这通常是随机的，但偶尔也可以采用系统化的方法使其变得更好，
-		可以利用对搜索空间的一致信息来初始化种群
+		可以利用对搜索空间的一致信息来初始化种群，初始化种群时需要指定个体染色体长度
 		*/
 		Population population = ga.initPopulation(50);
 

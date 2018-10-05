@@ -68,9 +68,17 @@ public class GeneticAlgorithm {
 	/**
 	 * Initialize population //初始化种群
 	 * 
-	 * @param chromosomeLength //染色体长度
-	 *            The length of the individuals chromosome //单个染色体的长度
+	 * @param chromosomeLength
+	 *            //染色体长度 The length of the individuals chromosome //单个染色体的长度
 	 * @return population The initial population generated //初始种群
+	 */
+
+	/**
+	 * 当构造完种群类和个体类之后，就可以在GeneticAlgorithm类中将它们示例化。即只需创建一个名为“initPopulation”方法，
+	 * 放在GeneticAlgorithm类中的任意位置
+	 * 
+	 * @param chromosomeLength
+	 * @author cloud
 	 */
 	public Population initPopulation(int chromosomeLength) {
 		// Initialize population
@@ -92,23 +100,36 @@ public class GeneticAlgorithm {
 	 *            the individual to evaluate
 	 * @return double The fitness value for individual
 	 */
+
+	/**
+	 * 为每个个体计算适应度函数值
+	 * 
+	 * 在这个例子中，适应度函数很简单，是染色体中1的个数，在这个例子中需要解决的是染色体中全一的问题。
+	 * 对于不同的问题，你需要生成不同版本的这个方法来合理计算个体的适应度函数值
+	 * 在评估阶段，种群的每个个体都要计算器适应度值，并存储以便将来使用，为了计算个体适应度，使用适应度函数进行评价
+	 * 
+	 * @author cloud
+	 */
 	public double calcFitness(Individual individual) {
 
-		// Track number of correct genes
+		// Track number of correct genes(跟踪正确基因的数量)
 		int correctGenes = 0;
 
-		// Loop over individual's genes
+		// Loop over individual's genes(循环个体的基因)
 		for (int geneIndex = 0; geneIndex < individual.getChromosomeLength(); geneIndex++) {
 			// Add one fitness point for each "1" found
+			// 对于一个个体，只要找到其一个基因是1，就将correctGenes的值增加1
 			if (individual.getGene(geneIndex) == 1) {
 				correctGenes += 1;
 			}
 		}
 
 		// Calculate fitness
+		// 计算适应度，将为1的基因的个数除以染色体中基因的长度
 		double fitness = (double) correctGenes / individual.getChromosomeLength();
 
 		// Store fitness
+		// 保存适应度函数值
 		individual.setFitness(fitness);
 
 		return fitness;

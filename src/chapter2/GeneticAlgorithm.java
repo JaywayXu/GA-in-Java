@@ -177,6 +177,19 @@ public class GeneticAlgorithm {
 	 * @param population
 	 * @return boolean True if termination condition met, otherwise, false
 	 */
+
+	/**
+	 * 检查种群是否到终止条件
+	 * 
+	 * 对于这个简单问题，最优解是全1，当到达一个较好的适应度时我们就可以停止算法
+	 * 
+	 * 有许多不同类型的终止条件，有时可能知道最佳解是什么(准确而言，是可能知道最佳解的适应度值)，在这种情况下，可以直接检查正确解。
+	 * 然而，并非总是能够知道最佳解的适应度是什么，所以我们可以在解变得“足够好”时终止，即解超过某个适应度阈值
+	 * 
+	 * @author cloud
+	 * @param population
+	 * @return
+	 */
 	public boolean isTerminationConditionMet(Population population) {
 		for (Individual individual : population.getIndividuals()) {
 			if (individual.getFitness() == 1) {
@@ -188,7 +201,7 @@ public class GeneticAlgorithm {
 	}
 
 	/**
-	 * Select parent for crossover
+	 * Select parent for crossover 选择父代作交叉
 	 * 
 	 * @param population
 	 *            The population to select parent from
@@ -196,9 +209,11 @@ public class GeneticAlgorithm {
 	 */
 	public Individual selectParent(Population population) {
 		// Get individuals
+		// 获得个体
 		Individual individuals[] = population.getIndividuals();
 
 		// Spin roulette wheel
+		// 旋转轮盘
 		double populationFitness = population.getPopulationFitness();
 		double rouletteWheelPosition = Math.random() * populationFitness;
 
@@ -235,6 +250,22 @@ public class GeneticAlgorithm {
 	 *            The population to apply crossover to
 	 * @return The new population
 	 */
+
+	/**
+	 * 对种群应用交叉
+	 * 
+	 * 交叉，吸引种群并融合个体来创造新的后代。希望当两个个体交叉是，他们的后代将拥有每个父母最强的品质。 当然也有可能子代会继承每个亲代最弱的品质
+	 * 
+	 * 此方法同时考虑遗传算法实例中的交叉率和精英数
+	 * 
+	 * 我们执行的交叉类型取决于问题域。 我们不希望使用交叉创建无效解决方案，因此需要针对不同类型的问题更改此方法。
+	 * 
+	 * 这个交叉算法从每个亲代随机选择基因进行交叉 如果个体不经过交叉，就直接加入下一个种群，否则就创建一个新个体
+	 * 
+	 * @author cloud
+	 * @param population
+	 * @return
+	 */
 	public Population crossoverPopulation(Population population) {
 		// Create new population
 		Population newPopulation = new Population(population.size());
@@ -245,13 +276,13 @@ public class GeneticAlgorithm {
 
 			// Apply crossover to this individual?
 			if (this.crossoverRate > Math.random() && populationIndex >= this.elitismCount) {
-				// Initialize offspring
+				// Initialize offspring初始化子代
 				Individual offspring = new Individual(parent1.getChromosomeLength());
 
 				// Find second parent
 				Individual parent2 = selectParent(population);
 
-				// Loop over genome
+				// Loop over genome 循环基因组
 				for (int geneIndex = 0; geneIndex < parent1.getChromosomeLength(); geneIndex++) {
 					// Use half of parent1's genes and half of parent2's genes
 					if (0.5 > Math.random()) {
@@ -262,9 +293,11 @@ public class GeneticAlgorithm {
 				}
 
 				// Add offspring to new population
+				// 把子代加入新种群中
 				newPopulation.setIndividual(populationIndex, offspring);
 			} else {
 				// Add individual to new population without applying crossover
+				// 将个体加入新的种群中而不采用交叉
 				newPopulation.setIndividual(populationIndex, parent1);
 			}
 		}
@@ -288,17 +321,34 @@ public class GeneticAlgorithm {
 	 *            The population to apply mutation to
 	 * @return The mutated population
 	 */
+
+	/**
+	 * 将变异应用到种群中
+	 * 
+	 * 变异更多大的影响个体而不是种群，遍历种群中的每个个体，在每个染色体上应用随机性。和交叉一样，变异的方法取决于不同的特定的问题。
+	 * 在这种情况下，我们只是随机地将0翻转为1，反之亦然。
+	 * 
+	 * 此方法将考虑GeneticAlgorithm实例的mutationRate(变异率)和elitismCount(精英数)
+	 * 在选择变异和交叉方法时，一定要确保选择的方法仍然能够得到一个有效解。这个例子中，需要确保基因变异只能产生0和1
+	 * 
+	 * @param population
+	 * @author cloud
+	 * @return
+	 */
 	public Population mutatePopulation(Population population) {
 		// Initialize new population
 		Population newPopulation = new Population(this.populationSize);
 
 		// Loop over current population by fitness
+		// 通过适应度值循环当前种群
 		for (int populationIndex = 0; populationIndex < population.size(); populationIndex++) {
 			Individual individual = population.getFittest(populationIndex);
 
 			// Loop over individual's genes
+			// 循环个体的基因
 			for (int geneIndex = 0; geneIndex < individual.getChromosomeLength(); geneIndex++) {
 				// Skip mutation if this is an elite individual
+				// 如果是一个精英个体则跳过变异过程
 				if (populationIndex > this.elitismCount) {
 					// Does this gene need mutation?
 					if (this.mutationRate > Math.random()) {
@@ -314,10 +364,12 @@ public class GeneticAlgorithm {
 			}
 
 			// Add individual to population
+			// 将变异后的个体传给新的种群
 			newPopulation.setIndividual(populationIndex, individual);
 		}
 
 		// Return mutated population
+		// 返回变异后的种群
 		return newPopulation;
 	}
 
